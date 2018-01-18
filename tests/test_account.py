@@ -1,3 +1,6 @@
+from bank.account import Account
+
+
 def test_create_account():
     # Given
 
@@ -12,3 +15,5 @@ def test_create_account():
 
     assert account.account_number == ACCOUNT_NUMBER
     assert account.balance == BALANCE
+
+
