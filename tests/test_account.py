@@ -31,4 +31,4 @@ def test_transfer_from_account():
     # Then
 
     assert  sending_account.balance == 0
-    assert receiving_account == AMOUNT
+    assert receiving_account.balance == AMOUNT
