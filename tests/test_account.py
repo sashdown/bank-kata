@@ -1,6 +1,5 @@
 from bank.account import Account
 
-
 def test_create_account():
     # Given
 
@@ -26,7 +25,7 @@ def test_transfer_from_account():
 
     # When
 
-    sending_account.transfer(to=receiving_account, amount = AMOUNT)
+    sending_account.transfer(to=receiving_account, amount = AMOUNT, history=[])
 
     # Then
 
@@ -42,9 +41,10 @@ def test_store_transaction_history():
     receiving_account = Account(1, 0)
 
     transaction_history = []
+
     # When
 
-    sending_account.transfer(to=receiving_account, amount=AMOUNT)
+    sending_account.transfer(to=receiving_account, amount=AMOUNT, history=transaction_history)
 
 
     # Then
