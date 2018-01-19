@@ -25,7 +25,7 @@ def test_transfer_from_account():
 
     # When
 
-    sending_account.transfer(to=receiving_account, amount = AMOUNT, history=[])
+    sending_account.transfer(payee=receiving_account, amount = AMOUNT, history=[])
 
     # Then
 
@@ -44,7 +44,7 @@ def test_store_transaction_history():
 
     # When
 
-    sending_account.transfer(to=receiving_account, amount=AMOUNT, history=transaction_history)
+    sending_account.transfer(payee=receiving_account, amount=AMOUNT, history=transaction_history)
 
 
     # Then
