@@ -1,6 +1,6 @@
 import collections
 
-Transaction = collections.namedtuple('Transaction', 'originator, destination, amount')
+Transaction = collections.namedtuple('Transaction', 'payer, payee, amount')
 
 
 class Account():
@@ -12,5 +12,5 @@ class Account():
         self.balance = self.balance - amount
         payee.balance = payee.balance + amount
 
-        transaction = Transaction(originator=self, destination=payee, amount=amount)
+        transaction = Transaction(payer=self, payee=payee, amount=amount)
         history.append(transaction)

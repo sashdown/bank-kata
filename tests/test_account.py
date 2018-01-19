@@ -52,5 +52,5 @@ def test_store_transaction_history():
     assert len(transaction_history) == 1
 
     transaction = transaction_history[0]
-    assert transaction.originator == sending_account
-    assert transaction.destination  == receiving_account
+    assert transaction.payer == sending_account
+    assert transaction.payee  == receiving_account
