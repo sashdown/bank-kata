@@ -1,50 +1,53 @@
 from bank.account import Account
 
+PAYEE_ACCOUNT_NUMBER = 1234
+PAYER_ACCOUNT_NUMBER = 5678
+
+TRANSFER_AMOUNT = 100
+
 def test_create_account():
     # Given
 
-    ACCOUNT_NUMBER = 1234
     BALANCE = 5678
 
     # When
 
-    account = Account(ACCOUNT_NUMBER, BALANCE)
+    account = Account(PAYER_ACCOUNT_NUMBER, BALANCE)
 
     # Then
 
-    assert account.account_number == ACCOUNT_NUMBER
+    assert account.account_number == PAYER_ACCOUNT_NUMBER
     assert account.balance == BALANCE
 
 
 def test_transfer_from_account():
     # Given
-    AMOUNT = 100
 
-    sending_account = Account(0, AMOUNT)
-    receiving_account = Account(1, 0)
+
+    sending_account = Account(PAYER_ACCOUNT_NUMBER, TRANSFER_AMOUNT)
+    receiving_account = Account(PAYEE_ACCOUNT_NUMBER, 0)
 
     # When
 
-    sending_account.transfer(payee=receiving_account, amount = AMOUNT, history=[])
+    sending_account.transfer(payee=receiving_account, amount = TRANSFER_AMOUNT, history=[])
 
     # Then
 
     assert  sending_account.balance == 0
-    assert receiving_account.balance == AMOUNT
+    assert receiving_account.balance == TRANSFER_AMOUNT
 
 
 def test_store_transaction_history():
     # Given
-    AMOUNT = 50
 
-    sending_account = Account(0, AMOUNT)
-    receiving_account = Account(1, 0)
+    sending_account = Account(PAYER_ACCOUNT_NUMBER, TRANSFER_AMOUNT)
+    receiving_account = Account(PAYEE_ACCOUNT_NUMBER, 0)
 
     transaction_history = []
 
     # When
 
-    sending_account.transfer(payee=receiving_account, amount=AMOUNT, history=transaction_history)
+    sending_account.transfer(payee=receiving_account, amount=TRANSFER_AMOUNT, history=transaction_history)
 
 
     # Then
@@ -53,4 +56,4 @@ def test_store_transaction_history():
 
     transaction = transaction_history[0]
     assert transaction.payer == sending_account
-    assert transaction.payee  == receiving_account
+    assert transaction.payee == receiving_account
