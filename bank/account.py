@@ -13,4 +13,4 @@ class Account():
         payee.balance = payee.balance + amount
 
         transaction = Transaction(payer=self, payee=payee, amount=amount)
-        history.append(transaction)
+        history.record(transaction)

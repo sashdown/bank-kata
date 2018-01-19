@@ -5,7 +5,7 @@ def test_find_single_transaction_in_history_by_payer(transaction_history, payee_
     # Given
 
     transaction = Transaction(payee=payee_account, payer=payer_account, amount=100)
-    transaction_history.append(transaction)
+    transaction_history.record(transaction=transaction)
 
     # When
     matching_transactions = transaction_history.find_transactions(payer=payer_account)
@@ -19,10 +19,10 @@ def test_find_multiple_transactions_in_history_by_payer(transaction_history, pay
     # Given
 
     first_transaction = Transaction(payee=payee_account, payer=payer_account, amount=1)
-    transaction_history.append(first_transaction)
+    transaction_history.record(transaction=first_transaction)
 
     second_transaction = Transaction(payee=payee_account, payer=payer_account, amount=2)
-    transaction_history.append(second_transaction)
+    transaction_history.record(transaction=second_transaction)
 
     # When
     matching_transactions = transaction_history.find_transactions(payer=payer_account)
@@ -43,8 +43,8 @@ def test_find_single_transaction_in_history_by_payer_containing_other_account_tr
     target_transaction = Transaction(payee=payee_account, payer=payer_account, amount=100)
     other_transaction = Transaction(payee=payee_account, payer=alternative_account, amount=55)
 
-    transaction_history.append(other_transaction)
-    transaction_history.append(target_transaction)
+    transaction_history.record(transaction=other_transaction)
+    transaction_history.record(transaction=target_transaction)
 
     # When
     matching_transactions = transaction_history.find_transactions(payer=payer_account)
@@ -58,7 +58,7 @@ def test_find_single_transaction_in_history_by_payee(transaction_history, payee_
     # Given
 
     transaction = Transaction(payee=payee_account, payer=payer_account, amount=100)
-    transaction_history.append(transaction)
+    transaction_history.record(transaction=transaction)
 
     # When
     matching_transactions = transaction_history.find_transactions(payee=payee_account)
@@ -77,8 +77,8 @@ def test_find_single_transaction_in_history_by_payee_containing_other_account_tr
     target_transaction = Transaction(payee=payee_account, payer=payer_account, amount=100)
     other_transaction = Transaction(payee=alternative_account, payer=payer_account, amount=55)
 
-    transaction_history.append(other_transaction)
-    transaction_history.append(target_transaction)
+    transaction_history.record(transaction=other_transaction)
+    transaction_history.record(transaction=target_transaction)
 
     # When
     matching_transactions = transaction_history.find_transactions(payee=payee_account)
@@ -92,10 +92,10 @@ def test_find_multiple_transactions_in_history_by_payee(transaction_history, pay
     # Given
 
     first_transaction = Transaction(payee=payee_account, payer=alternative_account, amount=1)
-    transaction_history.append(first_transaction)
+    transaction_history.record(transaction=first_transaction)
 
     second_transaction = Transaction(payee=payee_account, payer=alternative_account, amount=2)
-    transaction_history.append(second_transaction)
+    transaction_history.record(transaction=second_transaction)
 
     # When
     matching_transactions = transaction_history.find_transactions(payee=payee_account)
@@ -113,10 +113,10 @@ def test_find_transaction_only_matching_payer_and_payee_when_both_supplied(
 
     target_transaction = Transaction(payee=payee_account, payer=payer_account, amount=1)
 
-    transaction_history.append(target_transaction)
+    transaction_history.record(transaction=target_transaction)
 
-    transaction_history.append(Transaction(payee=payee_account, payer=alternative_account, amount=2))
-    transaction_history.append(Transaction(payee=alternative_account, payer=payer_account, amount=3))
+    transaction_history.record(transaction=Transaction(payee=payee_account, payer=alternative_account, amount=2))
+    transaction_history.record(transaction=Transaction(payee=alternative_account, payer=payer_account, amount=3))
 
     # When
     matching_transactions = transaction_history.find_transactions(payer=payer_account, payee=payee_account)

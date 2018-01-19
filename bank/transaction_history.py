@@ -1,4 +1,10 @@
-class TransactionHistory(list):
+class TransactionHistory:
+
+    def __init__(self):
+        self.transactions = []
+
+    def record(self, transaction):
+        self.transactions.append(transaction)
 
     def find_transactions(self, **kwargs):
         """
@@ -10,7 +16,7 @@ class TransactionHistory(list):
         payer = kwargs.get("payer", None)
         payee = kwargs.get("payee", None)
 
-        candidate_transactions = [transaction for transaction in self]
+        candidate_transactions = [transaction for transaction in self.transactions]
 
         if payer:
             candidate_transactions = [transaction for transaction in candidate_transactions if
