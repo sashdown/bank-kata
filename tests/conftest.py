@@ -18,5 +18,5 @@ def payer_account():
     return Account(PAYER_ACCOUNT_NUMBER, INITIAL_BALANCE)
 
 @pytest.fixture
-def transaction_history():
+def transaction_history(scope="function"):
     return TransactionHistory()

@@ -6,11 +6,11 @@ def test_find_single_transaction_in_history(transaction_history, payee_account, 
     # Given
     AMOUNT = 100
     transaction = Transaction(payee=payee_account, payer=payer_account, amount = AMOUNT)
-
+    transaction_history.append(transaction)
     # When
     matching_transactions = transaction_history.find_transactions(payee_account == payee_account)
 
     # Then
 
-    assert len (matching_transactions) == 0
+    assert len (matching_transactions) == 1
     assert matching_transactions[0] == transaction
