@@ -5,6 +5,7 @@ from bank.transaction_history import TransactionHistory
 
 PAYEE_ACCOUNT_NUMBER = 1234
 PAYER_ACCOUNT_NUMBER = 5678
+ALTERNATIVE_PAYER_ACCOUNT_NUMBER = 9753
 
 INITIAL_BALANCE = 100
 
@@ -16,6 +17,10 @@ def payee_account():
 @pytest.fixture
 def payer_account():
     return Account(PAYER_ACCOUNT_NUMBER, INITIAL_BALANCE)
+
+@pytest.fixture
+def alternative_payer_account():
+    return Account(ALTERNATIVE_PAYER_ACCOUNT_NUMBER, INITIAL_BALANCE)
 
 @pytest.fixture
 def transaction_history(scope="function"):
