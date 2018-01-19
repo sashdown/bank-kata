@@ -39,12 +39,12 @@ def test_find_multiple_transactions_in_history_by_payer(transaction_history, pay
 def test_find_single_transaction_in_history_by_payer_containing_other_account_transactions(transaction_history,
                                                                       payee_account,
                                                                       payer_account,
-                                                                      alternative_payer_account):
+                                                                      alternative_account):
 
     # Given
 
     target_transaction = Transaction(payee=payee_account, payer=payer_account, amount = 100 )
-    other_transaction  = Transaction(payee=payee_account, payer=alternative_payer_account, amount= 55)
+    other_transaction  = Transaction(payee=payee_account, payer=alternative_account, amount= 55)
 
     transaction_history.append(other_transaction)
     transaction_history.append(target_transaction)
@@ -70,3 +70,44 @@ def test_find_single_transaction_in_history_by_payee(transaction_history, payee_
     # Then
 
     assert [transaction] == matching_transactions
+
+
+def test_find_single_transaction_in_history_by_payee_containing_other_account_transactions(transaction_history,
+                                                                      payee_account,
+                                                                      payer_account,
+                                                                      alternative_account):
+
+    # Given
+
+    target_transaction = Transaction(payee=payee_account, payer=payer_account, amount = 100 )
+    other_transaction  = Transaction(payee=alternative_account, payer=payer_account, amount= 55)
+
+    transaction_history.append(other_transaction)
+    transaction_history.append(target_transaction)
+
+    # When
+    matching_transactions = transaction_history.find_transactions(payee = payee_account)
+
+    # Then
+
+    assert [ target_transaction ] == matching_transactions
+
+
+def test_find_multiple_transactions_in_history_by_payee(transaction_history, payee_account, alternative_account):
+
+    # Given
+
+    first_transaction = Transaction(payee=payee_account, payer=alternative_account, amount = 1)
+    transaction_history.append(first_transaction)
+
+    second_transaction = Transaction(payee=payee_account, payer=alternative_account, amount = 2)
+    transaction_history.append(second_transaction)
+
+    # When
+    matching_transactions = transaction_history.find_transactions(payee=payee_account)
+
+    # Then
+
+    assert 2 == len (matching_transactions)
+    assert first_transaction in matching_transactions
+    assert second_transaction in matching_transactions
