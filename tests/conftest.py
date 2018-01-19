@@ -9,6 +9,7 @@ ALTERNATIVE_ACCOUNT_NUMBER = 9753
 
 INITIAL_BALANCE = 100
 
+
 @pytest.fixture
 def payee_account():
     return Account(PAYEE_ACCOUNT_NUMBER, 0)

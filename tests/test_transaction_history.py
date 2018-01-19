@@ -115,7 +115,6 @@ def test_find_transaction_only_matching_payer_and_payee_when_both_supplied(
 
     transaction_history.append(target_transaction)
 
-
     transaction_history.append(Transaction(payee=payee_account, payer=alternative_account, amount=2))
     transaction_history.append(Transaction(payee=alternative_account, payer=payer_account, amount=3))
 
