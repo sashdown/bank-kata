@@ -17,6 +17,10 @@ def payee_account():
 def payer_account():
     return Account(PAYER_ACCOUNT_NUMBER, INITIAL_BALANCE)
 
+@pytest.fixture
+def transaction_history():
+    return TransactionHistory()
+
 def test_create_account():
 
     # When
@@ -29,11 +33,11 @@ def test_create_account():
     assert account.balance == INITIAL_BALANCE
 
 
-def test_transfer_from_account(payee_account, payer_account):
+def test_transfer_from_account(payee_account, payer_account, transaction_history):
 
     # When
 
-    payer_account.transfer(payee=payee_account, amount = TRANSFER_AMOUNT, history=TransactionHistory())
+    payer_account.transfer(payee=payee_account, amount = TRANSFER_AMOUNT, history=transaction_history)
 
     # Then
 
@@ -41,10 +45,7 @@ def test_transfer_from_account(payee_account, payer_account):
     assert payee_account.balance == TRANSFER_AMOUNT
 
 
-def test_store_transaction_history(payee_account, payer_account):
-    # Given
-
-    transaction_history = TransactionHistory()
+def test_store_transaction_history(payee_account, payer_account, transaction_history):
 
     # When
 
