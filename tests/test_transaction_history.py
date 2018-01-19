@@ -1,7 +1,7 @@
 from bank.account import Transaction
 
 
-def test_find_single_transaction_in_history(transaction_history, payee_account, payer_account):
+def test_find_single_transaction_in_history_by_payer(transaction_history, payee_account, payer_account):
 
     # Given
 
@@ -17,7 +17,7 @@ def test_find_single_transaction_in_history(transaction_history, payee_account, 
     assert transaction in matching_transactions
 
 
-def test_find_multiple_transactions_in_history(transaction_history, payee_account, payer_account):
+def test_find_multiple_transactions_in_history_by_payer(transaction_history, payee_account, payer_account):
 
     # Given
 
@@ -37,7 +37,7 @@ def test_find_multiple_transactions_in_history(transaction_history, payee_accoun
     assert second_transaction in matching_transactions
 
 
-def test_find_single_transaction_in_history_containing_other_account_transactions(transaction_history,
+def test_find_single_transaction_in_history_by_payer_containing_other_account_transactions(transaction_history,
                                                                       payee_account,
                                                                       payer_account,
                                                                       alternative_payer_account):
