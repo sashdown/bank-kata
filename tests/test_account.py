@@ -1,3 +1,5 @@
+import pytest
+
 from bank.account import Account
 
 PAYEE_ACCOUNT_NUMBER = 1234
@@ -6,6 +8,9 @@ PAYER_ACCOUNT_NUMBER = 5678
 TRANSFER_AMOUNT = 50
 INITIAL_BALANCE = 100
 
+@pytest.fixture
+def payee_account():
+    return Account(PAYEE_ACCOUNT_NUMBER, 0)
 
 def test_create_account():
 
@@ -19,20 +24,20 @@ def test_create_account():
     assert account.balance == INITIAL_BALANCE
 
 
-def test_transfer_from_account():
+def test_transfer_from_account(payee_account):
     # Given
 
     sending_account = Account(PAYER_ACCOUNT_NUMBER, INITIAL_BALANCE)
-    receiving_account = Account(PAYEE_ACCOUNT_NUMBER, 0)
+
 
     # When
 
-    sending_account.transfer(payee=receiving_account, amount = TRANSFER_AMOUNT, history=[])
+    sending_account.transfer(payee=payee_account, amount = TRANSFER_AMOUNT, history=[])
 
     # Then
 
     assert sending_account.balance == INITIAL_BALANCE - TRANSFER_AMOUNT
-    assert receiving_account.balance == TRANSFER_AMOUNT
+    assert payee_account.balance == TRANSFER_AMOUNT
 
 
 def test_store_transaction_history():
