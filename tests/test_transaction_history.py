@@ -8,7 +8,7 @@ def test_find_single_transaction_in_history(transaction_history, payee_account, 
     transaction = Transaction(payee=payee_account, payer=payer_account, amount = AMOUNT)
     transaction_history.append(transaction)
     # When
-    matching_transactions = transaction_history.find_transactions(payee_account == payee_account)
+    matching_transactions = transaction_history.find_transactions(payer=payer_account)
 
     # Then
 
@@ -29,7 +29,7 @@ def test_find_single_transaction_in_history_containing_other_account_transaction
     transaction_history.append(target_transaction)
 
     # When
-    matching_transactions = transaction_history.find_transactions(payee_account == payee_account)
+    matching_transactions = transaction_history.find_transactions(payer = payer_account)
 
     # Then
 
