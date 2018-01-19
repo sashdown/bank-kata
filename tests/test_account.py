@@ -40,23 +40,20 @@ def test_transfer_from_account(payee_account, payer_account):
     assert payee_account.balance == TRANSFER_AMOUNT
 
 
-def test_store_transaction_history():
+def test_store_transaction_history(payee_account, payer_account):
     # Given
-
-    sending_account = Account(PAYER_ACCOUNT_NUMBER, INITIAL_BALANCE)
-    receiving_account = Account(PAYEE_ACCOUNT_NUMBER, 0)
 
     transaction_history = []
 
     # When
 
-    sending_account.transfer(payee=receiving_account, amount=TRANSFER_AMOUNT, history=transaction_history)
+    payer_account.transfer(payee=payee_account, amount=TRANSFER_AMOUNT, history=transaction_history)
 
     # Then
 
     assert len(transaction_history) == 1
 
     transaction = transaction_history[0]
-    assert transaction.payer == sending_account
-    assert transaction.payee == receiving_account
+    assert transaction.payer == payer_account
+    assert transaction.payee == payee_account
     assert transaction.amount == TRANSFER_AMOUNT
