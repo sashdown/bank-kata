@@ -1,10 +1,23 @@
 class TransactionHistory(list):
+
     def find_transactions(self, **kwargs):
+        """
+        Return transactions with accounts matching (optional) supplied payer or payee accounts
+        If both payee and payer arguments are supplied, only return transactions from payer to payee
+        If no arguments are supplied, return all transactions
+        """
+
         payer = kwargs.get("payer", None)
         payee = kwargs.get("payee", None)
 
+        candidate_transactions = [transaction for transaction in self]
+
         if payer:
-            return [transaction for transaction in self if transaction.payer == payer]
+            candidate_transactions = [transaction for transaction in candidate_transactions if
+                                      transaction.payer == payer]
 
         if payee:
-            return [transaction for transaction in self if transaction.payee == payee]
+            candidate_transactions = [transaction for transaction in candidate_transactions if
+                                      transaction.payee == payee]
+
+        return candidate_transactions
