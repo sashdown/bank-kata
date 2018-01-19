@@ -1,6 +1,7 @@
 import pytest
 
 from bank.account import Account
+from bank.transaction_history import TransactionHistory
 
 PAYEE_ACCOUNT_NUMBER = 1234
 PAYER_ACCOUNT_NUMBER = 5678
@@ -32,7 +33,7 @@ def test_transfer_from_account(payee_account, payer_account):
 
     # When
 
-    payer_account.transfer(payee=payee_account, amount = TRANSFER_AMOUNT, history=[])
+    payer_account.transfer(payee=payee_account, amount = TRANSFER_AMOUNT, history=TransactionHistory())
 
     # Then
 
@@ -43,7 +44,7 @@ def test_transfer_from_account(payee_account, payer_account):
 def test_store_transaction_history(payee_account, payer_account):
     # Given
 
-    transaction_history = []
+    transaction_history = TransactionHistory()
 
     # When
 
